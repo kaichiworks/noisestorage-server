@@ -23,8 +23,11 @@ curl -fsSL https://noisestorage.com/install.sh | sudo bash
 
 ```bash
 tar xzf noisto-server-<version>.tar.gz && cd noisto-server-<version>
-echo '<the SIGNER line of https://noisestorage.com/install.sh>' > allowed_signers
+echo 'noisestorage-release namespaces="noisestorage-release" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICpmkWdxhIwaLjfd8YJKrqj+M7neEG7WRSLbMZYi84ZI' > allowed_signers
 ssh-keygen -Y verify -f allowed_signers -I noisestorage-release -n noisestorage-release -s SHA256SUMS.sig < SHA256SUMS
 sha256sum -c SHA256SUMS
 sudo bash setup.sh
 ```
+
+The release signing key (Ed25519, fingerprint `SHA256:prSH83/BHAfWZHgmUCawObaWBHNpNyy+sUkursYv6nM`) is the same as the `SIGNER` line of
+https://noisestorage.com/install.sh.
